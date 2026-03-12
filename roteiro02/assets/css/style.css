@@ -4,7 +4,7 @@ body {
 }
 
 header {
-    background-color: #003366;
+    background-color: indigo;
     color: white;
     padding: 15px;
 }
@@ -16,6 +16,27 @@ nav ul {
 nav li {
     display: inline;
     margin-right: 15px;
+}
+
+nav li a {
+    color: indigo;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    color: indianred;
+}
+
+section {
+    margin: 20px;
+
+    h2 {
+        color: indigo;
+    }
+
+    p {
+        color: gray;
+    }
 }
 
 footer {
