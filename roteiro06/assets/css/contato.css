@@ -1,0 +1,60 @@
+#contato-sec {
+    display: flex;
+    padding: 40px 20px;
+    text-align: center;
+    width: 80%;
+
+    justify-self: center;
+
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        color: indigo;
+        margin-bottom: 20px;
+    }
+
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    input, textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+
+        &:invalid {
+            border-color: red;
+        }
+    }
+
+    button {
+        padding: 10px;
+        background-color: indigo;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    
+        &:hover {
+            background-color: rgb(75, 0, 130);
+            transition: background-color .3s ease-in-out;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #contato-sec {
+        width: 100%;
+        padding: 20px;
+    }
+
+    form {
+        gap: 10px;
+    }
+}
