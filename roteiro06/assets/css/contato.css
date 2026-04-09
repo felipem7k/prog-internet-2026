@@ -1,57 +1,87 @@
 #contato-sec {
     display: flex;
-    padding: 40px 20px;
-    text-align: center;
-    width: 80%;
-
-    justify-self: center;
-
-    align-items: center;
+    padding: 40px 28px;
+    max-width: 560px;
+    margin: 24px auto 0;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     justify-content: center;
 
     h2 {
-        color: indigo;
+        color: #2d1b69;
         margin-bottom: 20px;
     }
-
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 14px;
+    width: 100%;
+
+    label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: -8px;
+    }
 
     input, textarea {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
+        padding: 12px 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        background-color: #fafafa;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-        &:invalid {
-            border-color: red;
+        &:focus {
+            outline: none;
+            border-color: #4a2c8a;
+            box-shadow: 0 0 0 3px rgba(74, 44, 138, 0.1);
+            background-color: white;
+        }
+
+        &:invalid:not(:placeholder-shown):not(:focus) {
+            border-color: #e74c3c;
         }
     }
 
     button {
-        padding: 10px;
-        background-color: indigo;
+        padding: 12px;
+        background: linear-gradient(135deg, #2d1b69, #4a2c8a);
         color: white;
         border: none;
-        border-radius: 4px;
-        font-size: 16px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
         cursor: pointer;
-    
+        margin-top: 4px;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+
         &:hover {
-            background-color: rgb(75, 0, 130);
-            transition: background-color .3s ease-in-out;
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    #mensagem-sucesso {
+        color: #27ae60;
+        font-weight: 600;
+        font-size: 0.9rem;
+        min-height: 1.2em;
     }
 }
 
 @media screen and (max-width: 600px) {
     #contato-sec {
-        width: 100%;
-        padding: 20px;
+        margin: 16px;
+        padding: 24px 20px;
     }
 
     form {
