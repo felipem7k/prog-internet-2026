@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1 id="titulo">Olá mundo!</h1>
+
+<ul id="minhaLista"></ul>
+<button id="add">Adicionar Item</button>
+
+<h2 id="contador">0</h2>
+<button id="btnSoma">Contar +1</button>
+<br>
+<br>
+<img id="lampada" src="off.png" style="width:100px">
+<button id="btnInterruptor">Ligar</button>
+
+<br>
+<br>
+
+<input type="number" id="palpite" placeholder="0 a 10">
+<button id="btnChutar">Chutar!</button>
+<p id="feedback"></p>
+
+<p>Erros: <span id="contadorErros">0</span></p>
+<button id="fugitivo" style="position: absolute; left: 50%; top: 50%;">
+Pegue-me!
+</button>
+
+</body>
+<script>
+    // contador
+    let valor = 0;
+    const display = document.getElementById("contador");
+    // lista 
+    const lista = document.getElementById("minhaLista");
+    const botao = document.getElementById("add");
+    // lampada
+    const lampadaImg = document.getElementById("lampada");
+    const interruptor = document.getElementById("btnInterruptor");
+    let lampadaAcesa = false;
+    // jogo secreto
+    const numeroSecreto = Math.floor(Math.random() * 11);
+    const palpiteInput = document.getElementById("palpite");
+    const feedbackTexto = document.getElementById("feedback");
+    const btnChutar = document.getElementById("btnChutar");
+    // botao fugitivo
+    const btnFugitivo = document.getElementById("fugitivo");
+    const placar = document.getElementById("contadorErros");
+    let erros = 0;
+
+    document.getElementById("btnSoma").addEventListener("click", () => {
+        valor++;
+        display.innerText = valor;
+    });
+
+    botao.addEventListener("click", () => {
+        const novoItem = document.createElement("li");
+        novoItem.innerText = "Novo Item na Lista";
+        lista.appendChild(novoItem);
+    });
+
+    interruptor.addEventListener("click", () => {
+        lampadaAcesa = !lampadaAcesa;
+        lampadaImg.src = lampadaAcesa ? "on.png" : "off.png";
+        interruptor.innerText = lampadaAcesa ? "Desligar" : "Ligar";
+    });
+
+    btnChutar.addEventListener("click", () => {
+        const chute = Number(palpiteInput.value);
+        if (chute === numeroSecreto) {
+            feedbackTexto.innerText = " Parabéns! Você acertou!";
+            feedbackTexto.style.color = "green";
+        } else {
+            feedbackTexto.innerText = chute > numeroSecreto ? "Muito alto!" : "Muito baixo!";
+            feedbackTexto.style.color = "red";
+        }
+    });
+
+    btnFugitivo.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        erros++;
+        placar.innerText = erros;
+        btnFugitivo.style.left = `${x}px`;
+        btnFugitivo.style.top = `${y}px`;
+    });
+
+    btnFugitivo.addEventListener("click", () => alert(" Você me pegou!"));
+</script>
+</html>
