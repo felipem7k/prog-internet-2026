@@ -4,32 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1 id="titulo">Olá mundo!</h1>
 
-<ul id="minhaLista"></ul>
-<button id="add">Adicionar Item</button>
+<div class="container">
+    <section>
+        <h3>Lista Dinâmica</h3>
+        <ul id="minhaLista"></ul>
+        <button id="add">Adicionar Item</button>
+    </section>
 
-<h2 id="contador">0</h2>
-<button id="btnSoma">Contar +1</button>
-<br>
-<br>
-<img id="lampada" src="off.png" style="width:100px">
-<button id="btnInterruptor">Ligar</button>
+    <section>
+        <h3>Contador Ativo</h3>
+        <h2 id="contador">0</h2>
+        <button id="btnSoma">Contar +1</button>
+    </section>
 
-<br>
-<br>
+    <section>
+        <h3>Interação Visual</h3>
+        <img id="lampada" src="off.png" style="width:80px">
+        <button id="btnInterruptor">Ligar</button>
+    </section>
 
-<input type="number" id="palpite" placeholder="0 a 10">
-<button id="btnChutar">Chutar!</button>
-<p id="feedback"></p>
+    <section>
+        <h3>Adivinhação</h3>
+        <input type="number" id="palpite" placeholder="0 a 10">
+        <button id="btnChutar">Chutar!</button>
+        <p id="feedback"></p>
+    </section>
 
-<p>Erros: <span id="contadorErros">0</span></p>
-<button id="fugitivo" style="position: absolute; left: 50%; top: 50%;">
-Pegue-me!
-</button>
+    <section>
+        <h3>Pedra, Papel, Tesoura</h3>
+        <div class="controles-jogo">
+            <button onclick="jogar('pedra')">✊ Pedra</button>
+            <button onclick="jogar('papel')">✋ Papel</button>
+            <button onclick="jogar('tesoura')">✌️ Tesoura</button>
+        </div>
+        <h3 id="resultadoJogo">Escolha um!</h3>
+    </section>
 
+    <section>
+        <h3>Busca de Endereço (CEP)</h3>
+        <input type="text" id="cep" placeholder="Digite o CEP">
+        <button onclick="atualizarCEP()">Buscar Endereço</button>
+        <p id="resultado"></p>
+    </section>
+</div>
+
+<div style="color: white; margin-top: 20px;">
+    Erros: <span id="contadorErros">0</span>
+</div>
+<button id="fugitivo">Pegue-me!</button>
 </body>
 <script>
     // contador
@@ -51,6 +78,8 @@ Pegue-me!
     const btnFugitivo = document.getElementById("fugitivo");
     const placar = document.getElementById("contadorErros");
     let erros = 0;
+    // jogo de escolha
+    const opcoes = ['pedra', 'papel', 'tesoura'];
 
     document.getElementById("btnSoma").addEventListener("click", () => {
         valor++;
@@ -90,5 +119,35 @@ Pegue-me!
     });
 
     btnFugitivo.addEventListener("click", () => alert(" Você me pegou!"));
+
+    function jogar(player) {
+        const pc = opcoes[Math.floor(Math.random() * 3)];
+        const res = document.getElementById("resultadoJogo");
+        if (player === pc) {
+            res.innerText = `Empate! Ambos escolheram ${pc}`;
+        } else if (
+            (player === 'pedra' && pc === 'tesoura') ||
+            (player === 'papel' && pc === 'pedra') ||
+            (player === 'tesoura' && pc === 'papel')
+        ) {
+            res.innerText = `Você Ganhou! ${player} vence ${pc}`;
+        } else {
+            res.innerText = `Você Perdeu! ${pc} vence ${player}`;
+        }
+    }
+
+    function atualizarCEP() {
+        const cep = document.getElementById("cep").value;
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(dados => {
+                if (dados.erro) {
+                    document.getElementById("resultado").innerText = "Erro!";
+                } else {
+                    document.getElementById("resultado").innerText =
+                    `${dados.logradouro}, ${dados.localidade}`;
+                }
+            });
+    }
 </script>
 </html>
